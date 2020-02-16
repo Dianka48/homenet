@@ -1,0 +1,28 @@
+h1 {
+  font-weight: bold;
+  color: magenta;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  padding: 10px;
+}
+
+button {
+  background-color: magenta;
+  border-radius: 5px;
+  transition-duration: 0.4s;
+  font-size: 15px;
+}
+
+button:hover {
+  background-color: white;
+  color: magenta;
+}
+
+a:hover, a:active {
+  color: magenta;
+}

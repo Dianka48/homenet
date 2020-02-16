@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Item</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+
+    <h1>Add Item</h1>
+    <a href="/shoppinglist">Back to Shopping List</a>
+    <hr>
+
+    <br>
+
+    <form action="/additem" method="post">
+        <label for="name">Name</label>
+    <input id="name" type="text" name="name"><br>
+        <br>
+        <label for="name">Quantity</label>
+    <input id="quantity" type="text" name="quantity">
+    <select name="scale">
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="pcs">pcs</option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+    </select>
+    <br><br>
+    <button type="submit">Add Item</button>
+</form>
+
+</body>
+</html>

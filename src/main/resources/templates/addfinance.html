@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Finance</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+
+<h1>Add Finance</h1>
+<a href="/finances">Back to Finances</a>
+<hr>
+
+<br>
+
+<form action="/addfinance" method="post">
+    <label for="date">Date</label>
+    <input id="date" type="date" name="date"><br>
+    <br>
+    <label for="cost">Cost</label>
+    <input id="cost" type="text" name="cost">
+    <label for="description">Description</label>
+    <input id="description" type="text" name="description">
+    <br>
+    <br>
+    <label for="category">Category</label>
+    <select name="category" id="category">
+        <option th:each="category : ${categories}" th:value="${category.id}"
+                th:text="${category.label}" >
+        </option>
+    </select>
+    <br><br>
+    <button type="submit">Add Finance</button>
+</form>
+
+</body>
+</html>

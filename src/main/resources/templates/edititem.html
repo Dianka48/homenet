@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Item</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+
+    <h1>Edit Item</h1>
+    <a href="/shoppinglist">Back to Shopping List</a>
+    <hr>
+
+    <br>
+
+    <form action="/edititem" method="post">
+        <input type="hidden" name="id" th:value="${item.id}">
+        <label for="name">Name</label>
+    <input id="name" type="text" name="name" th:value="${item.name}"><br>
+        <br>
+        <label for="name">Quantity</label>
+    <input id="quantity" type="text" name="quantity" th:value="${item.quantity}">
+    <select name="scale" th:field="*{item.scale}">
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="pcs">pcs</option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+    </select>
+    <br><br>
+    <button type="submit">Edit Item</button>
+</form>
+
+</body>
+</html>
