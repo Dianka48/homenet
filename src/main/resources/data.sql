@@ -15,3 +15,8 @@ insert into finance (`category`, `date`, `cost`, `description`) values (3, '2020
 insert into finance (`category`, `date`, `cost`, `description`) values (4, '2020-02-10', 1260, 'Annapurna dinner');
 insert into finance (`category`, `date`, `cost`, `description`) values (1, '2020-02-14', 500, 'Tesco groceries');
 insert into finance (`category`, `date`, `cost`, `description`) values (2, '2020-01-14', 16000, 'Mortgage');
+insert into finance (`category`, `date`, `cost`, `description`) values (2, '2019-04-14', 16000, 'Mortgage');
+insert into finance (`category`, `date`, `cost`, `description`) values (3, '2020-08-01', 1000, 'Pension fund');
+insert into finance (`category`, `date`, `cost`, `description`) values (4, '2020-04-10', 1260, 'Mix Grill dinner');
+insert into finance (`category`, `date`, `cost`, `description`) values (1, '2020-09-14', 500, 'Lidl groceries');
+insert into finance (`category`, `date`, `cost`, `description`) values (2, '2020-08-14', 16000, 'Car Loan');

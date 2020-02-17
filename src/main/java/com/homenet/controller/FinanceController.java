@@ -31,22 +31,36 @@ public class FinanceController {
 
     @GetMapping("/finances")
     public String finances(Model model, HttpServletRequest request) {
-        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
-        if (inputFlashMap != null && inputFlashMap.containsKey("year")) {
-            int year = (Integer) inputFlashMap.get("year");
-            Iterable<Finance> financesByYear = service.findByYear(year);
-            model.addAttribute("finances", financesByYear);
-        } else {
-            Iterable<Finance> finances = service.findAll();
-            model.addAttribute("finances", finances);
-        }
+        addDataToModel(model, request);
         return "finances";
     }
 
+    private void addDataToModel(Model model, HttpServletRequest request) {
+        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
+        if(inputFlashMap != null) {
+            if(inputFlashMap.containsKey("year") && inputFlashMap.containsKey("month")) {
+                int year = (Integer) inputFlashMap.get("year");
+                int month = (Integer) inputFlashMap.get("month");
+                model.addAttribute("finances", service.findByYearAndMonth(year, month));
+            } else if(inputFlashMap.containsKey("year")) {
+                int year = (Integer) inputFlashMap.get("year");
+                model.addAttribute("finances", service.findByYear(year));
+            } else if(inputFlashMap.containsKey("month")) {
+                int month = (Integer) inputFlashMap.get("month");
+                model.addAttribute("finances", service.findByMonth(month));
+            }
+        } else {
+            model.addAttribute("finances", service.findAll());
+        }
+    }
+
     @PostMapping("/finances")
-    public String findByYear(RedirectAttributes redirectAttributes, Integer year) {
+    public String findByYearAndMonth(RedirectAttributes redirectAttributes, Integer year, Integer month) {
         if(year != null) {
             redirectAttributes.addFlashAttribute("year", year);
+        }
+        if(month != null) {
+            redirectAttributes.addFlashAttribute("month", month);
         }
         return "redirect:/finances";
     }

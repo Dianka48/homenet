@@ -37,4 +37,12 @@ public class FinanceService {
     public Iterable<Finance> findByYear(int year) {
         return repository.findByYear(year);
     }
+
+    public Iterable<Finance> findByYearAndMonth(int year, int month) {
+        return repository.findByYearAndMonth(year, month);
+    }
+
+    public Iterable<Finance> findByMonth(int month) {
+        return repository.findByMonth(month);
+    }
 }
