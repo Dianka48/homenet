@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Statistics</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/scripts.js"></script>
+</head>
+<body>
+
+
+<h1>Finances</h1>
+<a href="/finances">Back to Finances</a>
+<a href="/addfinance">Add finance</a>
+<hr>
+
+<h2>Get statistics for:</h2>
+
+<form action="/statistics" method="post">
+    <label for="year">Year</label>
+    <input id="year" type="number" name="year" step="1">
+
+    <label for="month">Month</label>
+    <input id="month" type="number" name="month" step="1" min="1" max="12">
+
+    <button type="submit" id="statisticsSubmit">Submit</button>
+</form>
+<br><br>
+
+<h2 th:text="${date}"></h2>
+
+<p id="select" name="select" th:text="${select}"></p>
+
+<h4 th:if="${receipts != null}" th:text="${totalReceipts}"></h4>
+<p id="receipts" name="receipts" th:if="${receipts != null}" th:text="${receipts}"></p>
+
+<h4 th:if="${expenditures != null}" th:text="${totalExpenditures}"></h4>
+<p id="expenditures" name="expenditures" th:if="${expenditures != null}" th:text="${expenditures}"></p>
+
+<h3 id="totalH3" th:if="${totalValue != null}" th:text="${totalText}"></h3>
+<p id="total" name="total" th:if="${totalValue != null}" th:text="${totalValue}"></p>
+
+
+<br>
+
+</body>
+</html>

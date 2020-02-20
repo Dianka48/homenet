@@ -6,6 +6,7 @@ import com.homenet.model.ShoppingItem;
 import com.homenet.service.FinanceCategoryService;
 import com.homenet.service.FinanceService;
 import com.homenet.service.ShoppingListService;
+import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 
@@ -99,5 +102,61 @@ public class FinanceController {
         service.deleteById(id);
         return "";
     }
+
+    @GetMapping("/statistics")
+    public String statistics(Model model, HttpServletRequest request) {
+        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
+        if(inputFlashMap != null) {
+            if(inputFlashMap.containsKey("year") && inputFlashMap.containsKey("month")) {
+                int year = (Integer) inputFlashMap.get("year");
+                int month = (Integer) inputFlashMap.get("month");
+                int day = 1;
+                LocalDate date = LocalDate.of(year, month, day);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+                String dateString = date.format(formatter);
+                model.addAttribute("date", dateString);
+                double allReceiptsByYearAndMonth = service.findAllReceiptsByYearAndMonth(year, month);
+                double sumOfExpendituresByYearAndMonth = service.findSumOfExpendituresByYearAndMonth(year, month);
+                double total = allReceiptsByYearAndMonth + sumOfExpendituresByYearAndMonth;
+                model.addAttribute("receipts", allReceiptsByYearAndMonth);
+                model.addAttribute("totalReceipts", "Total Receipts:");
+                model.addAttribute("expenditures", sumOfExpendituresByYearAndMonth);
+                model.addAttribute("totalExpenditures", "Total Expenditures:");
+                model.addAttribute("totalText", "Total");
+                model.addAttribute("totalValue", total);
+            } else if(inputFlashMap.containsKey("year")) {
+                int year = (Integer) inputFlashMap.get("year");
+                int month = 1;
+                int day = 1;
+                LocalDate date = LocalDate.of(year, month, day);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
+                String dateString = date.format(formatter);
+                model.addAttribute("date", dateString);
+                double sumOfExpendituresByYear = service.findSumOfExpendituresByYear(year);
+                double sumOfReceiptsByYear = service.findSumOfReceiptsByYear(year);
+                double total = sumOfReceiptsByYear + sumOfExpendituresByYear;
+                model.addAttribute("expenditures", sumOfExpendituresByYear);
+                model.addAttribute("totalExpenditures", "Total Expenditures:");
+                model.addAttribute("receipts", sumOfReceiptsByYear);
+                model.addAttribute("totalReceipts", "Total Receipts:");
+                model.addAttribute("totalText", "Total");
+                model.addAttribute("totalValue", total);
+            }
+        } else {
+            model.addAttribute("select", "Select Year and Month");
+        }
+        return "statistics";
+    }
+
+    @PostMapping("/statistics")
+        public String statisticsPost(RedirectAttributes redirectAttributes, Integer year, Integer month) {
+            if(year != null) {
+                redirectAttributes.addFlashAttribute("year", year);
+            }
+            if(month != null) {
+                redirectAttributes.addFlashAttribute("month", month);
+            }
+            return "redirect:statistics";
+        }
 
 }

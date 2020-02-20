@@ -13,4 +13,16 @@ public interface FinanceRepository extends CrudRepository<Finance, Integer> {
 
     @Query("from Finance where month(date) = :month")
     Iterable<Finance> findByMonth(int month);
+
+    @Query("SELECT finance.cost FROM Finance finance WHERE finance.cost > 0 and year(date) = :year and month(date) = :month")
+    Iterable<Double> findAllReceiptsByYearAndMonth(int year, int month);
+
+    @Query("SELECT SUM(finance.cost) FROM Finance finance WHERE finance.cost < 0 and year(date) = :year and month(date) = :month")
+    Double findSumOfExpendituresByYearAndMonth(int year, int month);
+
+    @Query("SELECT SUM(cost) FROM Finance WHERE cost < 0 and year(date) = :year")
+    Double findSumOfExpendituresByYear(int year);
+
+    @Query("SELECT SUM(cost) FROM Finance WHERE cost > 0 and year(date) = :year")
+    Double findSumOfReceiptsByYear(int year);
 }
