@@ -1,6 +1,7 @@
 package com.homenet.dao;
 
 import com.homenet.model.Finance;
+import com.homenet.model.FinanceCategory;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -25,4 +26,10 @@ public interface FinanceRepository extends CrudRepository<Finance, Integer> {
 
     @Query("SELECT SUM(cost) FROM Finance WHERE cost > 0 and year(date) = :year")
     Double findSumOfReceiptsByYear(int year);
+
+    @Query("SELECT SUM(cost) FROM Finance WHERE category = :category AND year(date) = :year AND month(date) = :month")
+    Double findSumOfCostsByCategoryForYearAndMonth(FinanceCategory category, int year, int month);
+
+    @Query("SELECT SUM(cost) FROM Finance WHERE category = :category AND year(date) = :year")
+    Double findSumOfCostsByCategoryForYear(FinanceCategory category, int year);
 }

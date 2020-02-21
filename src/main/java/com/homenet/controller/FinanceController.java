@@ -3,6 +3,7 @@ package com.homenet.controller;
 import com.homenet.model.Finance;
 import com.homenet.model.FinanceCategory;
 import com.homenet.model.ShoppingItem;
+import com.homenet.model.StatisticsModel;
 import com.homenet.service.FinanceCategoryService;
 import com.homenet.service.FinanceService;
 import com.homenet.service.ShoppingListService;
@@ -106,44 +107,21 @@ public class FinanceController {
     @GetMapping("/statistics")
     public String statistics(Model model, HttpServletRequest request) {
         Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
-        if(inputFlashMap != null) {
-            if(inputFlashMap.containsKey("year") && inputFlashMap.containsKey("month")) {
+        if (inputFlashMap != null) {
+            if (inputFlashMap.containsKey("year") && inputFlashMap.containsKey("month")) {
                 int year = (Integer) inputFlashMap.get("year");
                 int month = (Integer) inputFlashMap.get("month");
-                int day = 1;
-                LocalDate date = LocalDate.of(year, month, day);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-                String dateString = date.format(formatter);
-                model.addAttribute("date", dateString);
-                double allReceiptsByYearAndMonth = service.findAllReceiptsByYearAndMonth(year, month);
-                double sumOfExpendituresByYearAndMonth = service.findSumOfExpendituresByYearAndMonth(year, month);
-                double total = allReceiptsByYearAndMonth + sumOfExpendituresByYearAndMonth;
-                model.addAttribute("receipts", allReceiptsByYearAndMonth);
-                model.addAttribute("totalReceipts", "Total Receipts:");
-                model.addAttribute("expenditures", sumOfExpendituresByYearAndMonth);
-                model.addAttribute("totalExpenditures", "Total Expenditures:");
-                model.addAttribute("totalText", "Total");
-                model.addAttribute("totalValue", total);
-            } else if(inputFlashMap.containsKey("year")) {
+                StatisticsModel statisticsModel = service.addStatisticsByYearAndMonth(year, month);
+                model.addAttribute("statisticsModel", statisticsModel);
+                Map sumOfCostsForAllCategoriesByYearAndMonth = service.findSumOfCostsForAllCategoriesByYearAndMonth(year, month);
+                model.addAttribute("categoryMap", sumOfCostsForAllCategoriesByYearAndMonth);
+            } else if (inputFlashMap.containsKey("year")) {
                 int year = (Integer) inputFlashMap.get("year");
-                int month = 1;
-                int day = 1;
-                LocalDate date = LocalDate.of(year, month, day);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
-                String dateString = date.format(formatter);
-                model.addAttribute("date", dateString);
-                double sumOfExpendituresByYear = service.findSumOfExpendituresByYear(year);
-                double sumOfReceiptsByYear = service.findSumOfReceiptsByYear(year);
-                double total = sumOfReceiptsByYear + sumOfExpendituresByYear;
-                model.addAttribute("expenditures", sumOfExpendituresByYear);
-                model.addAttribute("totalExpenditures", "Total Expenditures:");
-                model.addAttribute("receipts", sumOfReceiptsByYear);
-                model.addAttribute("totalReceipts", "Total Receipts:");
-                model.addAttribute("totalText", "Total");
-                model.addAttribute("totalValue", total);
+                StatisticsModel statisticsModel = service.addStatisticsByYear(year);
+                model.addAttribute("statisticsModel", statisticsModel);
+                Map sumOfCostsForAllCategoriesByYear = service.findSumOfCostsForAllCategoriesByYear(year);
+                model.addAttribute("categoryMap", sumOfCostsForAllCategoriesByYear);
             }
-        } else {
-            model.addAttribute("select", "Select Year and Month");
         }
         return "statistics";
     }

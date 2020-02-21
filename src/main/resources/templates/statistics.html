@@ -4,7 +4,7 @@
     <title>Statistics</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/scripts.js"></script>
+    <script src="/js/scriptstatistics.js"></script>
 </head>
 <body>
 
@@ -27,18 +27,55 @@
 </form>
 <br><br>
 
-<h2 th:text="${date}"></h2>
 
-<p id="select" name="select" th:text="${select}"></p>
 
-<h4 th:if="${receipts != null}" th:text="${totalReceipts}"></h4>
-<p id="receipts" name="receipts" th:if="${receipts != null}" th:text="${receipts}"></p>
+<div class="statistics" th:if="${statisticsModel}">
 
-<h4 th:if="${expenditures != null}" th:text="${totalExpenditures}"></h4>
-<p id="expenditures" name="expenditures" th:if="${expenditures != null}" th:text="${expenditures}"></p>
+    <h2 th:text="${statisticsModel.dateString}"></h2>
 
-<h3 id="totalH3" th:if="${totalValue != null}" th:text="${totalText}"></h3>
-<p id="total" name="total" th:if="${totalValue != null}" th:text="${totalValue}"></p>
+    <table>
+        <thead>
+            <tr>
+                <th>Total Receipts</th>
+                <th>Total Expenditures</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="receipts" name="receipts" th:text="${statisticsModel.receipts}"></td>
+                <td id="expenditures" name="expenditures" th:text="${statisticsModel.expenditures}"></td>
+                <td id="total" name="total" th:text="${statisticsModel.total}"></td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <table>
+        <thead>
+        <tr>
+            <th>Category</th>
+            <th>Total Receipts/Expenditures</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="instance : ${categoryMap}">
+            <td id="category" name="category" th:text="${instance.key.label}"></td>
+            <td id="costs" name="costs" class="costs" th:text="${instance.value}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+<div th:unless="${statisticsModel}">
+    <p id="select" name="select">Select Year and Month.</p>
+</div>
+
+
+
 
 
 <br>

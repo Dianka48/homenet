@@ -22,10 +22,4 @@ window.onload = function() {
   }
 }
 
-window.onload = function() {
-    const totalH3 = document.getElementById('totalH3');
-    const total = document.getElementById("total");
-    console.log(total.innerHTML);
-    total.innerHTML < 0 ? totalH3.style.color = "rgb(255, 0, 0)" : totalH3.style.color = "rgb(0, 204, 0)";
-}
 
