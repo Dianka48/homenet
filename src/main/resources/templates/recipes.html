@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Finances</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/scripts.js"></script>
+</head>
+<body>
+
+
+<h1>Finances</h1>
+<a href="/addfinance">Add finance</a>
+<a href="/statistics">Statistics</a>
+<hr>
+
+<h2>Find finances by:</h2>
+
+<form action="/finances" method="post">
+    <label for="year">Year</label>
+    <input id="year" type="number" name="year" step="1">
+
+    <label for="month">Month</label>
+    <input id="month" type="number" name="month" step="1" min="1" max="12">
+
+    <button type="submit">Submit</button>
+</form>
+<br><br>
+
+<table class='finances'>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>CATEGORY</th>
+        <th>DATE</th>
+        <th>COST</th>
+        <th>DESCRIPTION</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="finance: ${finances}">
+        <td th:text="${finance.id}"/>
+        <td th:text="${finance.category.label}"/>
+        <td th:text="${#dates.format(finance.date, 'dd-MMM-yyyy')}"/>
+        <td th:text="${finance.cost}"/>
+        <td th:text="${finance.description}"/>
+
+        <td>
+            <button th:attr="data-id=${finance.id}" data-handler="deletefinance" class="delete-button">Delete</button>
+        </td>
+        <td><a th:href="@{'/editfinance/' + ${finance.id}}">Edit</a></td>
+
+
+    </tr>
+    </tbody>
+</table>
+<br>
+
+</body>
+</html>
