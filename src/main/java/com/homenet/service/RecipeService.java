@@ -1,23 +1,36 @@
 package com.homenet.service;
 
-import com.homenet.dao.ShoppingItemRepository;
-import com.homenet.model.ShoppingItem;
+
+import com.homenet.dao.RecipeRepository;
+import com.homenet.model.Recipe;
+import com.homenet.model.RecipeCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Optional;
+import java.io.IOException;
 
 @Service
-public class ShoppingListService {
+public class RecipeService {
 
     @Autowired
-    ShoppingItemRepository repository;
+    RecipeRepository repository;
+    @Autowired
+    RecipeCategoryService categoryService;
 
-    public Iterable<ShoppingItem> findAll() {
-        return repository.findAll();
+    public Iterable<Recipe> findAllOrderByName() {
+        return repository.findAllByOrderByName();
     }
 
-    public void save(ShoppingItem item) {
+    public Recipe findByName(String name) {
+        return repository.findByName(name);
+    }
+
+    public Iterable<Recipe> findAllOrderByCategoryAndName() {
+        return repository.findAllByOrderByCategoryAndName();
+    }
+
+    public void save(Recipe item) {
         repository.save(item);
     }
 
@@ -25,8 +38,20 @@ public class ShoppingListService {
         repository.deleteById(id);
     }
 
-    public ShoppingItem findById(int id) {
-        Optional<ShoppingItem> shoppingItem = repository.findById(id);
-        return shoppingItem.orElse(null);
+    public Iterable<Recipe> findByCategoryOrderByName(String category) {
+        RecipeCategory recipeCategory = categoryService.findByLabel(category);
+        return repository.findByCategoryOrderByName(recipeCategory);
     }
+
+    public void addImage(Recipe recipe, MultipartFile image) {
+        if (image != null) {
+            try {
+                recipe.setPhoto(image.getBytes());
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        }
+
+    }
+
 }

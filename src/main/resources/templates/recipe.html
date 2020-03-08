@@ -1,36 +1,40 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Edit Item</title>
+    <title>Recipe</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
 
-    <h1>Edit Item</h1>
-    <a href="/shoppinglist">Back to Shopping List</a>
+    <h1 th:text="${recipe.name}"></h1>
+    <a href="/recipes">Back to Recipes</a>
+    <a href="/addrecipe">Add recipe</a>
     <hr>
 
-    <br>
+    <div>
+        <h3>Category</h3>
+        <p ><i th:text="${recipe.category.label}"></i></p>
+    </div>
 
-    <form action="/edititem" method="post">
-        <input type="hidden" name="id" th:value="${item.id}">
-        <label for="name">Name</label>
-    <input id="name" type="text" name="name" th:value="${item.name}"><br>
+    <div>
+        <h2>Ingredients</h2>
+        <p th:if="${recipe.ingredients == ''}">There are no ingredients for this recipe.</p>
+        <p th:text="${recipe.ingredients}"></p>
+    </div>
+
+    <div>
+        <h2>Instructions</h2>
+        <p th:if="${recipe.instructions == ''}">There are no instructions for this recipe.</p>
+        <p th:text="${recipe.instructions}"></p>
         <br>
-        <label for="name">Quantity</label>
-    <input id="quantity" type="text" name="quantity" th:value="${item.quantity}">
-    <select name="scale" th:field="*{item.scale}">
-        <option value="g">g</option>
-        <option value="kg">kg</option>
-        <option value="pcs">pcs</option>
-        <option value="ml">ml</option>
-        <option value="l">l</option>
-    </select>
-    <br><br>
-    <button type="submit">Edit Item</button>
-</form>
+    </div>
+
+    <div th:unless="${image == null}">
+        <img th:src="@{'data:image/png;base64,'+${image}}" width="500">
+        <br>
+    </div>
 
 </body>
 </html>

@@ -1,9 +1,12 @@
 package com.homenet.dao;
 
-import com.homenet.model.FinanceCategory;
+import com.homenet.model.RecipeCategory;
 import org.springframework.data.repository.CrudRepository;
 
-public interface FinanceCategoryRepository extends CrudRepository<FinanceCategory, Integer> {
+import java.util.Optional;
 
-    Iterable<FinanceCategory> findAllByOrderById();
+public interface RecipeCategoryRepository extends CrudRepository<RecipeCategory, Integer> {
+
+    Iterable<RecipeCategory> findAllByOrderById();
+    Optional<RecipeCategory> findByLabel(String label);
 }

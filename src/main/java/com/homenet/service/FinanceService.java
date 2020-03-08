@@ -107,12 +107,13 @@ public class FinanceService {
         return new StatisticsModel(receipts, expenditures, year);
     }
 
-    public Map findSumOfCostsForAllCategoriesByYearAndMonth(int year, int month) {
+    public Map<FinanceCategory, Double> findSumOfCostsForAllCategoriesByYearAndMonth(int year, int month) {
         Iterable<FinanceCategory> categories = categoryRepository.findAllByOrderById();
         Map<FinanceCategory, Double> categoryCostMap = new LinkedHashMap<>();
         for (FinanceCategory category : categories) {
-            if (repository.findSumOfCostsByCategoryForYearAndMonth(category, year, month) != null) {
-                categoryCostMap.put(category, repository.findSumOfCostsByCategoryForYearAndMonth(category, year, month));
+            Double sumOfCostsByCategoryForYearAndMonth = repository.findSumOfCostsByCategoryForYearAndMonth(category, year, month);
+            if (sumOfCostsByCategoryForYearAndMonth != null) {
+                categoryCostMap.put(category, sumOfCostsByCategoryForYearAndMonth);
             } else {
                 categoryCostMap.put(category, 0.0);
             }
@@ -120,12 +121,13 @@ public class FinanceService {
         return categoryCostMap;
     }
 
-    public Map findSumOfCostsForAllCategoriesByYear(int year) {
+    public Map<FinanceCategory, Double> findSumOfCostsForAllCategoriesByYear(int year) {
         Iterable<FinanceCategory> categories = categoryRepository.findAllByOrderById();
         Map<FinanceCategory, Double> categoryCostMap = new LinkedHashMap<>();
         for (FinanceCategory category : categories) {
-            if (repository.findSumOfCostsByCategoryForYear(category, year) != null) {
-                categoryCostMap.put(category, repository.findSumOfCostsByCategoryForYear(category, year));
+            Double sumOfCostsByCategoryForYear = repository.findSumOfCostsByCategoryForYear(category, year);
+            if (sumOfCostsByCategoryForYear != null) {
+                categoryCostMap.put(category, sumOfCostsByCategoryForYear);
             } else {
                 categoryCostMap.put(category, 0.0);
             }

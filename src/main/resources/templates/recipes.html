@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Finances</title>
+    <title>Recipes</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/scripts.js"></script>
@@ -9,20 +9,26 @@
 <body>
 
 
-<h1>Finances</h1>
-<a href="/addfinance">Add finance</a>
-<a href="/statistics">Statistics</a>
+<h1>Recipes</h1>
+<a href="/recipes">Back to Recipes</a>
+<a href="/addrecipe">Add recipe</a>
 <hr>
 
-<h2>Find finances by:</h2>
+<h2>Find recipes by:</h2>
 
-<form action="/finances" method="post">
-    <label for="year">Year</label>
-    <input id="year" type="number" name="year" step="1">
-
-    <label for="month">Month</label>
-    <input id="month" type="number" name="month" step="1" min="1" max="12">
-
+<form action="/recipes" method="post">
+    <label for="category">Category</label>
+    <select name="category" id="category">
+        <option value="Chicken">Chicken</option>
+        <option value="Beef">Beef</option>
+        <option value="Pork">Pork</option>
+        <option value="Other meat dishes">Other meat dishes</option>
+        <option value="Vegetables">Vegetables</option>
+        <option value="Soups">Soups</option>
+        <option value="Side dishes">Side dishes</option>
+        <option value="Desserts">Desserts</option>
+        <option value="Savoury">Savoury</option>
+    </select>
     <button type="submit">Submit</button>
 </form>
 <br><br>
@@ -32,24 +38,19 @@
     <tr>
         <th>ID</th>
         <th>CATEGORY</th>
-        <th>DATE</th>
-        <th>COST</th>
-        <th>DESCRIPTION</th>
+        <th>NAME</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="finance: ${finances}">
-        <td th:text="${finance.id}"/>
-        <td th:text="${finance.category.label}"/>
-        <td th:text="${#dates.format(finance.date, 'dd-MMM-yyyy')}"/>
-        <td th:text="${finance.cost}"/>
-        <td th:text="${finance.description}"/>
+    <tr th:each="recipe: ${recipes}">
+        <td th:text="${recipe.id}"/>
+        <td th:text="${recipe.category.label}"/>
+        <td><a th:href="@{'/recipe/' + ${recipe.name}}" th:text="${recipe.name}"></a></td>
 
         <td>
-            <button th:attr="data-id=${finance.id}" data-handler="deletefinance" class="delete-button">Delete</button>
+            <button th:attr="data-id=${recipe.id}" data-handler="deleterecipe" class="delete-button">Delete</button>
         </td>
-        <td><a th:href="@{'/editfinance/' + ${finance.id}}">Edit</a></td>
-
+        <td><a th:href="@{'/editrecipe/' + ${recipe.name}}">Edit</a></td>
 
     </tr>
     </tbody>

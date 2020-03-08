@@ -1,26 +1,27 @@
 package com.homenet.service;
 
 import com.homenet.dao.FinanceCategoryRepository;
-import com.homenet.dao.FinanceRepository;
-import com.homenet.model.Finance;
+import com.homenet.dao.RecipeCategoryRepository;
 import com.homenet.model.FinanceCategory;
+import com.homenet.model.Recipe;
+import com.homenet.model.RecipeCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class FinanceCategoryService {
+public class RecipeCategoryService {
 
     @Autowired
-    FinanceCategoryRepository repository;
+    RecipeCategoryRepository repository;
 
-    public Iterable<FinanceCategory> findAll() {
-        return repository.findAll();
+    public Iterable<RecipeCategory> findAllByOrderById() {
+        return repository.findAllByOrderById();
     }
 
-    public FinanceCategory findById(int id) {
-        Optional<FinanceCategory> financeCategory = repository.findById(id);
-        return financeCategory.orElse(null);
+    public RecipeCategory findByLabel(String category) {
+        Optional<RecipeCategory> recipeCategory = repository.findByLabel(category);
+        return recipeCategory.orElse(null);
     }
 }
