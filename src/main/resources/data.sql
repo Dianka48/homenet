@@ -20,6 +20,21 @@ insert into recipe_category (`id`, `label`) values (8, 'Desserts');
 insert into recipe_category (`id`, `label`) values (9, 'Savoury');
 
 
+insert into fitness (`name`, `date`, `weight`, `waist`, `thighs`, `hips`) values ('Dianka', '2020-03-01', 57.2, 67, 53, 97);
+insert into fitness (`name`, `date`, `weight`, `waist`, `thighs`, `hips`) values ('Dianka', '2020-03-02', 57.2, 67, 53, 97);
+insert into fitness (`name`, `date`, `weight`, `waist`, `thighs`, `hips`) values ('Dianka', '2020-03-03', 57.2, 67, 53, 97);
+insert into fitness (`name`, `date`, `weight`, `waist`, `thighs`, `hips`) values ('Dianka', '2019-02-01', 57.2, 67, 53, 97);
+insert into fitness (`name`, `date`, `weight`, `waist`, `thighs`, `hips`) values ('Dianka', '2019-02-01', 57.2, 67, 53, 97);
+insert into fitness (`name`, `date`, `weight`, `waist`, `thighs`, `hips`) values ('Dianka', '2019-12-01', 57.2, 67, 53, 97);
+insert into fitness (`name`, `date`, `weight`, `waist`, `thighs`, `hips`) values ('Dianka', '2019-12-01', 57.2, 67, 53, 97);
+insert into fitness (`name`, `date`, `weight`, `waist`, `thighs`, `hips`) values ('Petko', '2020-03-01', 57.2, 67, 53, 97);
+insert into fitness (`name`, `date`, `weight`, `waist`, `thighs`, `hips`) values ('Petko', '2020-01-01', 57.2, 67, 53, 97);
+insert into fitness (`name`, `date`, `weight`, `waist`, `thighs`, `hips`) values ('Petko', '2020-01-01', 57.2, 67, 53, 97);
+insert into fitness (`name`, `date`, `weight`, `waist`, `thighs`, `hips`) values ('Petko', '2019-02-01', 57.2, 67, 53, 97);
+insert into fitness (`name`, `date`, `weight`, `waist`, `thighs`, `hips`) values ('Petko', '2019-12-01', 57.2, 67, 53, 97);
+
+
+
 insert into recipe (`name`, `category`, `ingredients`, `instructions`) values ('Bread', 9, 'salt, pepper, flour', 'Mix all the ingredients and add to the bowl and bake');
 insert into recipe (`name`, `category`, `ingredients`, `instructions`) values ('Chicken Tika Masala', 1, 'chicken, tomatoes, ginger, salt, pepper', 'Mix all the ingredients and cook the chicken');
 insert into recipe (`name`, `category`, `ingredients`, `instructions`) values ('Muffins', 8, 'sugar, milk, chocolate', 'Mix all the ingredients and bake. Add sugar on top of the muffins');

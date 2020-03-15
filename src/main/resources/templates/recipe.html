@@ -11,6 +11,7 @@
     <h1 th:text="${recipe.name}"></h1>
     <a href="/recipes">Back to Recipes</a>
     <a href="/addrecipe">Add recipe</a>
+    <a th:href="@{'/editrecipe/' + ${recipe.name}}">Edit this recipe</a>
     <hr>
 
     <div>

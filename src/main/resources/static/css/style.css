@@ -51,3 +51,8 @@ margin: 0px 10px;
    font-weight: bold;
 }
 
+.alert {
+    color: rgb(212, 6, 6);
+    font-size: 20px;
+}
+

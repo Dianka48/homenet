@@ -58,10 +58,20 @@ public class RecipeController {
     }
 
     @GetMapping("/addrecipe")
-    public String addRecipe(Model model) {
+    public String addRecipe(Model model, HttpServletRequest request) {
         Iterable<RecipeCategory> categories = categoryService.findAllByOrderById();
         model.addAttribute("categories", categories);
+        addFailedMessage(request, model);
         return "addrecipe";
+    }
+
+    private void addFailedMessage(HttpServletRequest request, Model model) {
+        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
+        if (inputFlashMap != null) {
+            if (inputFlashMap.containsKey("failedMessage")) {
+                model.addAttribute("failedMessage", inputFlashMap.get("failedMessage"));
+            }
+        }
     }
 
 
@@ -74,29 +84,65 @@ public class RecipeController {
         }
         return "recipe";
     }
-//
-//    @GetMapping("/editfinance/{id}")
-//    public String editFinance(Model model, @PathVariable int id) {
-//        Iterable<FinanceCategory> categories = categoryService.findAll();
-//        model.addAttribute("categories", categories);
-//        Finance finance = service.findById(id);
-//        model.addAttribute("finance", finance);
-//        return "editfinance";
-//    }
-//
-//    @PostMapping("/editfinance")
-//    public String editFinancePost(Finance finance) {
-//        service.save(finance);
-//        return "redirect:/finances";
-//    }
-//
-    @PostMapping("/addrecipe")
-    public String addRecipe(Recipe recipe, @RequestParam("image") MultipartFile image) {
-        service.addImage(recipe, image);
-        service.save(recipe);
-        return "redirect:/recipes";
+
+    @GetMapping("/editrecipe/{name}")
+    public String editRecipe(Model model, @PathVariable String name, HttpServletRequest request) {
+        Iterable<RecipeCategory> categories = categoryService.findAllByOrderById();
+        model.addAttribute("categories", categories);
+        Recipe recipe = service.findByName(name);
+        model.addAttribute("recipe", recipe);
+        if (recipe.getPhoto() != null && recipe.getPhoto().length > 0) {
+            model.addAttribute("image", Base64.getEncoder().encodeToString(recipe.getPhoto()));
+        }
+        addFailedMessage(request, model);
+        return "editrecipe";
     }
 
+    @PostMapping("/editrecipe")
+    public String editRecipePost(Recipe recipe, @RequestParam("image") MultipartFile image, RedirectAttributes redirectAttributes) {
+        if (checkNameAndID(recipe.getName(), recipe.getId(), redirectAttributes)) {
+            String currentName = service.findById(recipe.getId()).getName();
+            return "redirect:/editrecipe/" + currentName;
+        } else {
+            if (!image.isEmpty()) {
+                service.addImage(recipe, image);
+            } else {
+                service.addExistingImage(recipe);
+            }
+            service.save(recipe);
+            return "redirect:/recipes";
+        }
+    }
+
+    @PostMapping("/addrecipe")
+    public String addRecipe(RedirectAttributes redirectAttributes, Recipe recipe, @RequestParam("image") MultipartFile image) {
+        if (checkName(recipe.getName(), redirectAttributes)) {
+            return "redirect:/addrecipe";
+        } else {
+            service.addImage(recipe, image);
+            service.save(recipe);
+            return "redirect:/recipes";
+        }
+
+    }
+
+    private boolean checkName(String name, RedirectAttributes redirectAttributes) {
+        if (service.findByName(name) != null) {
+            redirectAttributes.addFlashAttribute("failedMessage", "The name of the recipe already exists. Please choose another name.");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkNameAndID(String name, int id, RedirectAttributes redirectAttributes) {
+        Recipe recipe = service.findByName(name);
+
+        if ((recipe != null) && service.findById(recipe.getId()).getId() != id) {
+            redirectAttributes.addFlashAttribute("failedMessage", "The name of the recipe already exists. Please choose another name.");
+            return true;
+        }
+        return false;
+    }
 
     @DeleteMapping("/deleterecipe/{id}")
     @ResponseBody

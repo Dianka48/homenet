@@ -11,6 +11,8 @@ public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
 
     Recipe findByName(String name);
 
+    Recipe findById(int id);
+
     @Query("FROM Recipe ORDER BY category, name")
     Iterable<Recipe> findAllByOrderByCategoryAndName();
 

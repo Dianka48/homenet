@@ -40,6 +40,10 @@
         <input id="image" name="image" type="file">
     <br><br>
     <button type="submit">Add Item</button>
+
+        <div th:if="${failedMessage}">
+            <p th:text="${failedMessage}" class="alert"></p>
+        </div>
 </form>
 
 </body>

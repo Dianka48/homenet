@@ -26,6 +26,10 @@ public class RecipeService {
         return repository.findByName(name);
     }
 
+    public Recipe findById(int id) {
+        return repository.findById(id);
+    }
+
     public Iterable<Recipe> findAllOrderByCategoryAndName() {
         return repository.findAllByOrderByCategoryAndName();
     }
@@ -50,6 +54,20 @@ public class RecipeService {
             } catch (IOException e) {
                 System.err.println(e);
             }
+        }
+
+    }
+
+    public void addExistingImage(Recipe recipe) {
+        Recipe currentRecipe = repository.findById(recipe.getId());
+        if (currentRecipe.getPhoto() != null) {
+            byte[] photo = currentRecipe.getPhoto();
+            recipe.setPhoto(photo);
+//            try {
+//                recipe.setPhoto(photo.getBytes());
+//            } catch (IOException e) {
+//                System.err.println(e);
+//            }
         }
 
     }
