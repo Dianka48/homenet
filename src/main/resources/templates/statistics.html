@@ -1,14 +1,13 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
 <head>
     <title>Statistics</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/scriptstatistics.js"></script>
+
 </head>
 <body>
 
-
+<div layout:fragment="content">
 <h1>Finances</h1>
 <a href="/finances">Back to Finances</a>
 <a href="/addfinance">Add finance</a>
@@ -62,7 +61,7 @@
         <tbody>
         <tr th:each="instance : ${categoryMap}">
             <td id="category" name="category" th:text="${instance.key.label}"></td>
-            <td id="costs" name="costs" class="costs" th:text="${instance.value}"></td>
+            <td name="costs" class="costs" th:text="${instance.value}"></td>
         </tr>
         </tbody>
     </table>
@@ -73,12 +72,11 @@
 <div th:unless="${statisticsModel}">
     <p id="select" name="select">Select Year and Month.</p>
 </div>
-
-
-
-
-
 <br>
 
+</div>
+<div layout:fragment="afterscripts">
+    <script src="/js/scriptstatistics.js"></script>
+</div>
 </body>
 </html>

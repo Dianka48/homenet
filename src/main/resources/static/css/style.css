@@ -47,6 +47,10 @@ a {
 margin: 0px 10px;
 }
 
+p a {
+margin: 0px; 0px;
+}
+
 #total {
    font-weight: bold;
 }

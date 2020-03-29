@@ -1,13 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
 <head>
     <title>Recipe</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-
+<div layout:fragment="content">
     <h1 th:text="${recipe.name}"></h1>
     <a href="/recipes">Back to Recipes</a>
     <a href="/addrecipe">Add recipe</a>
@@ -36,6 +35,6 @@
         <img th:src="@{'data:image/png;base64,'+${image}}" width="500">
         <br>
     </div>
-
+</div>
 </body>
 </html>

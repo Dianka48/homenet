@@ -1,14 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
 <head>
     <title>Recipes</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/scripts.js"></script>
 </head>
 <body>
 
-
+<div layout:fragment="content">
 <h1>Recipes</h1>
 <a href="/recipes">Back to Recipes</a>
 <a href="/addrecipe">Add recipe</a>
@@ -56,6 +54,6 @@
     </tbody>
 </table>
 <br>
-
+</div>
 </body>
 </html>

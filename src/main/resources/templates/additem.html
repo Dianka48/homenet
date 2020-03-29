@@ -1,13 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
 <head>
     <title>Add Item</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-
+<div layout:fragment="content">
     <h1>Add Item</h1>
     <a href="/shoppinglist">Back to Shopping List</a>
     <hr>
@@ -30,6 +29,6 @@
     <br><br>
     <button type="submit">Add Item</button>
 </form>
-
+</div>
 </body>
 </html>

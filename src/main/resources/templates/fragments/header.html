@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
+    <a class="navbar-brand" th:href="@{/homenet}">Homenet</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/finances}">Finances</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/recipes}">Recipes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/shoppinglist}">Shopping List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/fitness}">Fitness</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

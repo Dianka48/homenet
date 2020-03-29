@@ -1,13 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
 <head>
     <title>Edit Finance</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-
+<div layout:fragment="content">
     <h1>Edit Finance</h1>
     <a href="/finances">Back to Finances</a>
     <hr>
@@ -34,6 +33,6 @@
     <br><br>
     <button type="submit">Edit Finance</button>
 </form>
-
+</div>
 </body>
 </html>
