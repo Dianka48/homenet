@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Homenet</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+<h1>Homenet</h1>
+<hr>
+
+<div>
+    <h2>Shopping List</h2>
+    <p>Create a new shopping list or modify the current one. Add new items or delete the ones you already bought.<br>
+        Visit your <a href="/shoppinglist">current shopping list</a>.</p>
+</div>
+
+<div>
+    <h2>Finances</h2>
+    <p>Check your finances, add a new receipt or expenditure, edit or delete the current ones. Filter your finances by year and month to see how your household is doing.<br>
+        Get interesting <a href="statistics">statistics</a> for your finances filtered by year and month. See how much you have spent or how much you have earned for each category and in total.<br>
+        To see or filter your current finances visit <a href="/finances">finances</a>.</p>
+</div>
+
+<div>
+    <h2>Recipes</h2>
+    <p>Add new recipes with ingredients and instructions. You can also upload a photo of the meal you have cooked. Edit or delete the recipes.<br>
+        To find your favourite recipes by category go to <a href="/recipes">recipes</a>.</p>
+</div>
+
+<div>
+    <h2>Fitness</h2>
+    <p>Add a new fitness record or start tracking the fitness stats of a new person. Edit or delete your current records.<br>
+        To see how fit is your body add your name, weight and measurements (waist, thighs, hips) for each day.<br>
+        You can filter your <a href="/fitness">fitness</a> stats by name, year and month.</p>
+</div>
+</div>
+</body>
+</html>
