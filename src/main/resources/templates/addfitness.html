@@ -8,27 +8,30 @@
 
 <div layout:fragment="content">
 <h1>Add Fitness</h1>
-<a href="/fitness">Back to Finances</a>
+<a href="/fitness">Back to Fitness</a>
 <hr>
 
 <br>
 
-<form action="/addfitness" method="post">
+<form action="/addfitness" method="post" class="form-group">
     <label for="date">Date</label>
-    <input id="date" type="date" name="date"><br>
+    <input id="date" type="date" name="date" class="form-control"><br>
     <br>
     <label for="name">Name</label>
-    <input id="name" type="text" name="name">
+    <input id="name" type="text" name="name" class="form-control">
     <br>
     <br>
     <label for="weight">Weight</label>
-    <input id="weight" type="text" name="weight">
+    <input id="weight" type="text" name="weight" class="form-control">
+    <br>
     <label for="waist">Waist</label>
-    <input id="waist" type="text" name="waist">
+    <input id="waist" type="text" name="waist" class="form-control">
+    <br>
     <label for="thighs">Thighs</label>
-    <input id="thighs" type="text" name="thighs">
+    <input id="thighs" type="text" name="thighs" class="form-control">
+    <br>
     <label for="hips">Hips</label>
-    <input id="hips" type="text" name="hips">
+    <input id="hips" type="text" name="hips" class="form-control">
     <br>
     <br>
     <button type="submit">Add Fitness</button>

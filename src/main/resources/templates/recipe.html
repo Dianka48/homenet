@@ -17,13 +17,13 @@
         <h3>Category</h3>
         <p ><i th:text="${recipe.category.label}"></i></p>
     </div>
-
+    <br>
     <div>
         <h2>Ingredients</h2>
         <p th:if="${recipe.ingredients == ''}">There are no ingredients for this recipe.</p>
         <p th:text="${recipe.ingredients}"></p>
     </div>
-
+    <br>
     <div>
         <h2>Instructions</h2>
         <p th:if="${recipe.instructions == ''}">There are no instructions for this recipe.</p>

@@ -9,27 +9,31 @@
 <div layout:fragment="content">
     <h1>Edit Fitness</h1>
     <a href="/fitness">Back to Fitness</a>
+    <a href="/addfitness">Add Fitness</a>
     <hr>
 
     <br>
 
-    <form action="/editfitness" method="post">
+    <form action="/editfitness" method="post" class="form-group">
         <input type="hidden" name="id" th:value="${fitness.id}">
         <label for="date">Date</label>
-    <input id="date" type="date" th:field="*{fitness.date}"><br>
+    <input id="date" type="date" th:field="*{fitness.date}" class="form-control"><br>
         <br>
         <label for="name">Name</label>
-        <input id="name" type="text" name="name" th:value="${fitness.name}">
+        <input id="name" type="text" name="name" th:value="${fitness.name}" class="form-control">
         <br>
         <br>
         <label for="weight">Weight</label>
-        <input id="weight" type="text" name="weight" th:value="${fitness.weight}">
+        <input id="weight" type="text" name="weight" th:value="${fitness.weight}" class="form-control">
+        <br>
         <label for="waist">Waist</label>
-        <input id="waist" type="text" name="waist" th:value="${fitness.waist}">
+        <input id="waist" type="text" name="waist" th:value="${fitness.waist}" class="form-control">
+        <br>
         <label for="thighs">Thighs</label>
-        <input id="thighs" type="text" name="thighs" th:value="${fitness.thighs}">
+        <input id="thighs" type="text" name="thighs" th:value="${fitness.thighs}" class="form-control">
+        <br>
         <label for="hips">Hips</label>
-        <input id="hips" type="text" name="hips" th:value="${fitness.hips}">
+        <input id="hips" type="text" name="hips" th:value="${fitness.hips}" class="form-control">
         <br>
         <br>
     <button type="submit">Edit Fitness</button>

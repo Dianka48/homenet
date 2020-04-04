@@ -13,18 +13,17 @@
 
 <br>
 
-<form action="/addfinance" method="post">
+<form action="/addfinance" method="post" class="form-group">
     <label for="date">Date</label>
-    <input id="date" type="date" name="date"><br>
+    <input id="date" type="date" name="date" class="form-control">
     <br>
     <label for="cost">Cost</label>
-    <input id="cost" type="text" name="cost">
+    <input id="cost" type="text" name="cost" class="form-control">
     <label for="description">Description</label>
-    <input id="description" type="text" name="description">
-    <br>
+    <input id="description" type="text" name="description" class="form-control">
     <br>
     <label for="category">Category</label>
-    <select name="category" id="category">
+    <select name="category" id="category" class="form-control">
         <option th:each="category : ${categories}" th:value="${category.id}"
                 th:text="${category.label}" >
         </option>
