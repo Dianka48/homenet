@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Add Fitness</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+<h1>Add Fitness</h1>
+<a href="/fitness">Back to Finances</a>
+<hr>
+
+<br>
+
+<form action="/addfitness" method="post">
+    <label for="date">Date</label>
+    <input id="date" type="date" name="date"><br>
+    <br>
+    <label for="name">Name</label>
+    <input id="name" type="text" name="name">
+    <br>
+    <br>
+    <label for="weight">Weight</label>
+    <input id="weight" type="text" name="weight">
+    <label for="waist">Waist</label>
+    <input id="waist" type="text" name="waist">
+    <label for="thighs">Thighs</label>
+    <input id="thighs" type="text" name="thighs">
+    <label for="hips">Hips</label>
+    <input id="hips" type="text" name="hips">
+    <br>
+    <br>
+    <button type="submit">Add Fitness</button>
+</form>
+</div>
+</body>
+</html>

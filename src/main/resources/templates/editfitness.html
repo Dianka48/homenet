@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Edit Fitness</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <h1>Edit Fitness</h1>
+    <a href="/fitness">Back to Fitness</a>
+    <hr>
+
+    <br>
+
+    <form action="/editfitness" method="post">
+        <input type="hidden" name="id" th:value="${fitness.id}">
+        <label for="date">Date</label>
+    <input id="date" type="date" th:field="*{fitness.date}"><br>
+        <br>
+        <label for="name">Name</label>
+        <input id="name" type="text" name="name" th:value="${fitness.name}">
+        <br>
+        <br>
+        <label for="weight">Weight</label>
+        <input id="weight" type="text" name="weight" th:value="${fitness.weight}">
+        <label for="waist">Waist</label>
+        <input id="waist" type="text" name="waist" th:value="${fitness.waist}">
+        <label for="thighs">Thighs</label>
+        <input id="thighs" type="text" name="thighs" th:value="${fitness.thighs}">
+        <label for="hips">Hips</label>
+        <input id="hips" type="text" name="hips" th:value="${fitness.hips}">
+        <br>
+        <br>
+    <button type="submit">Edit Fitness</button>
+</form>
+</div>
+</body>
+</html>
